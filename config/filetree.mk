@@ -52,14 +52,13 @@ EMBEETLE_MAKEFILE_INTERFACE_VERSION = 7
 # INCLUDED CFILES:
 C_OFILES = \
 project/source/Debug/debug.c.o \
-project/source/Peripheral/src/ch32v00x_dbgmcu.c.o \
 project/source/Peripheral/src/ch32v00x_gpio.c.o \
 project/source/Peripheral/src/ch32v00x_misc.c.o \
 project/source/Peripheral/src/ch32v00x_rcc.c.o \
 project/source/Peripheral/src/ch32v00x_usart.c.o \
-project/source/Samples/GPIO/Tauno_GPIO_Toggle/User/ch32v00x_it.c.o \
-project/source/Samples/GPIO/Tauno_GPIO_Toggle/User/main.c.o \
-project/source/Samples/GPIO/Tauno_GPIO_Toggle/User/system_ch32v00x.c.o
+project/source/Tauno/Blink_1/User/ch32v00x_it.c.o \
+project/source/Tauno/Blink_1/User/main.c.o \
+project/source/Tauno/Blink_1/User/system_ch32v00x.c.o
 
 # INCLUDED CXXFILES:
 CXX_OFILES =
@@ -76,7 +75,8 @@ HDIR_FLAGS = \
 -I$(SOURCE_DIR)source/Core \
 -I$(SOURCE_DIR)source/Debug \
 -I$(SOURCE_DIR)source/Peripheral/inc \
--I$(SOURCE_DIR)source/Samples/GPIO/Tauno_GPIO_Toggle/User
+-I$(SOURCE_DIR)source/Tauno/Blink_1 \
+-I$(SOURCE_DIR)source/Tauno/Blink_1/User
 
 # INCLUDED ARCHIVES
 PROJECT_LDLIBS =

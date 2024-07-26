@@ -22,8 +22,8 @@
 #include "debug.h"
 
 /* PWM Output Mode Definition */
-#define PWM_MODE1   0
-#define PWM_MODE2   1
+#define PWM_MODE1   0  // Edge aligned
+#define PWM_MODE2   1  // Centered aligned
 
 /* PWM Output Mode Selection */
 //#define PWM_MODE PWM_MODE1
@@ -53,8 +53,8 @@ void TIM1_PWMOut_Init(u16 arr, u16 psc, u16 ccp)
     GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
     GPIO_Init( GPIOD, &GPIO_InitStructure );
 
-    TIM_TimeBaseInitStructure.TIM_Period = arr;
-    TIM_TimeBaseInitStructure.TIM_Prescaler = psc;
+    TIM_TimeBaseInitStructure.TIM_Period = arr;  // defines the total number of count in the period
+    TIM_TimeBaseInitStructure.TIM_Prescaler = psc;  // defines the period of the PWM signal
     TIM_TimeBaseInitStructure.TIM_ClockDivision = TIM_CKD_DIV1;
     TIM_TimeBaseInitStructure.TIM_CounterMode = TIM_CounterMode_Up;
     TIM_TimeBaseInit( TIM1, &TIM_TimeBaseInitStructure);
@@ -68,8 +68,8 @@ void TIM1_PWMOut_Init(u16 arr, u16 psc, u16 ccp)
 #endif
 
     TIM_OCInitStructure.TIM_OutputState = TIM_OutputState_Enable;
-    TIM_OCInitStructure.TIM_Pulse = ccp;
-    TIM_OCInitStructure.TIM_OCPolarity = TIM_OCPolarity_High;
+    TIM_OCInitStructure.TIM_Pulse = ccp;  // defines the pulse width of PWM signal.
+    TIM_OCInitStructure.TIM_OCPolarity = TIM_OCPolarity_High;  // sets the polarity of PWM signal if it will be High or Low
     TIM_OC1Init( TIM1, &TIM_OCInitStructure );
 
     TIM_CtrlPWMOutputs(TIM1, ENABLE );
@@ -86,10 +86,20 @@ void TIM1_PWMOut_Init(u16 arr, u16 psc, u16 ccp)
  */
 int main(void)
 {
+  
     USART_Printf_Init(115200);
-    printf("SystemClk:%d\r\n",SystemCoreClock);
+    printf("SystemClk:%d\r\n", (unsigned)SystemCoreClock);
+    // period -, prescaler -, pulse value
+    // TIM1_PWMOut_Init( 100, 48000-1, 50 );  // 9.90hz
+    // TIM1_PWMOut_Init( 100, 48000-1, 25 );  // 9.90hz
+    // TIM1_PWMOut_Init( 100, 120-1, 50);  // 3.96kHz
+    // TIM1_PWMOut_Init( 200, 120-1, 50);  // 1.9kHz
+    // TIM1_PWMOut_Init( 100, 60-1, 50);  // 7.9kHz
+    // TIM1_PWMOut_Init( 150, 30-1, 25);  // 10.59kHz
+    TIM1_PWMOut_Init( 150, 30-1, 100);  // 10.59kHz
+  
+    int i = 0;
 
-    TIM1_PWMOut_Init( 100, 48000-1, 50 );
-
-    while(1);
+    while(1) {
+    }
 }

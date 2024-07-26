@@ -81,16 +81,19 @@ int main(void) {
 
     // Set the message to blink as morse code
     const char *msg = "Hello World";
+    int i = 0;
 
     // Morse the message indefinitely
     while(1) {
         printf("Hello World!\n");
-      
+      /*
         if(morse(msg, BLINKY_GPIO_PORT, BLINKY_GPIO_PIN, BLINK_LENGTH_MS) 
             != OK) {
             printf("An error occurred: Invalid message.\n");
         }
-        Delay_Ms(1000);  // 1 second
+      */
+        printf("%d\n", i++);
+        Delay_Ms(400);  // 1 second
     }
 }
 
